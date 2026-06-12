@@ -37,6 +37,7 @@ def index():
             {"name": "Deportes", "icon": "fas fa-futbol", "description": "Me encanta jugar a la pelota con mis amigos."},
             {"name": "Lectura", "icon": "fas fa-book-open", "description": "Disfruto de un buen libro para aprender y relajarme."},
             {"name": "Familia", "icon": "fas fa-walking", "description": "Pasear y compartir momentos especiales con mi familia."},
+            {"name": "Música", "icon": "fas fa-music", "description": "Escuchar y descubrir nuevos géneros musicales en mi día a día."},
             {"name": "Tecnología", "icon": "fas fa-laptop-code", "description": "Explorar nuevas herramientas y lenguajes de programación."}
         ],
         "about_me": "Soy una persona muy sociable y familiera. En mis tiempos libres disfruto mucho de jugar a la pelota, leer y pasear con mi familia. Me considero alguien que valora mucho los vínculos personales y el trabajo en equipo.",
@@ -44,7 +45,8 @@ def index():
         "why_me": "Soy una persona altamente responsable, con una gran capacidad para adaptarme a diversos entornos de trabajo. Mi versatilidad me permite enfrentar nuevos desafíos con eficacia, asegurando siempre un compromiso total con los objetivos del equipo.",
         "contact": {
             "instagram": "thiago_rojas90",
-            "gmail": "thiagorojas9878@gmail.com"
+            "gmail": "thiagorojas9878@gmail.com",
+            "github": "thiago9878-del"
         }
     }
     return render_template('index.html', profile=profile_data)
