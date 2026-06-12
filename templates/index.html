@@ -309,7 +309,7 @@
                            (player.matrix[0].length / 2 | 0);
             if (collide(arena, player)) {
                 gameRunning = false;
-                gameOverMsg.innerText = `¿Qué pasó ahí, ${player.name}?`;
+                gameOverMsg.innerHTML = `¡Lo lamento, <span style="color: #007bff; font-weight: bold; font-size: 1.5rem;">${player.name}</span>!<br>¿Qué pasó ahí?`;
                 gameOverOverlay.style.display = 'flex';
             }
         }
