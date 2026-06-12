@@ -149,6 +149,14 @@
                     <button id="start-btn" class="ad-button" style="padding: 10px 20px; font-size: 1rem;">Iniciar Juego</button>
                 </div>
                 <canvas id="tetris" width="240" height="400"></canvas>
+                <div id="game-over" class="game-over-overlay">
+                    <div class="game-over-content">
+                        <h2>¡PERDISTE!</h2>
+                        <img src="https://media.giphy.com/media/hStvd5LiWCFzXYZRe7/giphy.gif" alt="Meme Perdiste">
+                        <p>¿Qué pasó ahí, Thiago?</p>
+                        <button onclick="restartGame()" class="ad-button" style="padding: 10px 20px;">Revivir</button>
+                    </div>
+                </div>
                 <div class="controls-hint">
                     <p>Usa las flechas del teclado para mover y rotar.</p>
                 </div>
@@ -185,6 +193,7 @@
         const context = canvas.getContext('2d');
         const scoreElement = document.getElementById('score');
         const startBtn = document.getElementById('start-btn');
+        const gameOverOverlay = document.getElementById('game-over');
 
         context.scale(20, 20);
 
@@ -201,6 +210,11 @@
                 ++y;
                 player.score += rowCount * 10;
                 rowCount *= 2;
+                
+                // Aumentar velocidad cada vez que hace puntos
+                if (dropInterval > 100) {
+                    dropInterval -= 10;
+                }
             }
             updateScore();
         }
@@ -326,10 +340,21 @@
             player.pos.x = (arena[0].length / 2 | 0) -
                            (player.matrix[0].length / 2 | 0);
             if (collide(arena, player)) {
-                arena.forEach(row => row.fill(0));
-                player.score = 0;
-                updateScore();
+                // GAME OVER
+                gameRunning = false;
+                gameOverOverlay.style.display = 'flex';
             }
+        }
+
+        function restartGame() {
+            gameOverOverlay.style.display = 'none';
+            arena.forEach(row => row.fill(0));
+            player.score = 0;
+            dropInterval = 400; // Velocidad inicial más rápida
+            updateScore();
+            gameRunning = true;
+            playerReset();
+            update();
         }
 
         function playerRotate(dir) {
@@ -367,7 +392,7 @@
         }
 
         let dropCounter = 0;
-        let dropInterval = 1000;
+        let dropInterval = 400; // Velocidad inicial más rápida (era 1000)
         let lastTime = 0;
         let gameRunning = false;
 
