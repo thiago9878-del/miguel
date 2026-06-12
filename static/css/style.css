@@ -382,6 +382,45 @@ h2 {
     background: var(--primary-color);
 }
 
+/* Juego Tetris */
+.game-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #2c3e50;
+    color: white;
+    padding: 20px;
+    border: 4px solid var(--accent-color);
+}
+
+.game-container h2 {
+    color: white;
+    border: none;
+}
+
+#tetris {
+    background: #000;
+    border: 2px solid #fff;
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+}
+
+.game-info {
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+#score {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--accent-color);
+}
+
+.controls-hint {
+    margin-top: 15px;
+    font-size: 0.8rem;
+    opacity: 0.8;
+}
+
 /* Footer */
 footer {
     background-color: var(--secondary-color);
