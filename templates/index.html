@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ profile.name }} | Portafolio Profesional</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+    <!-- Font Awesome para iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="#home" class="logo">{{ profile.name }}</a>
+            <ul class="nav-links">
+                <li><a href="#home">Inicio</a></li>
+                <li><a href="#about">Sobre Mí</a></li>
+                <li><a href="#skills">Habilidades</a></li>
+                <li><a href="#interests">Intereses</a></li>
+                <li><a href="#contact">Contacto</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Anuncios Laterales (Solo visibles en PC) -->
+    <aside class="ad-sidebar left">
+        <div class="ad-card">
+            <span class="ad-tag">Publicidad</span>
+            <img src="https://images.unsplash.com/photo-1515879218367-8466d910aaa4?w=200&q=80" alt="Python">
+            <h4>Curso Python Pro</h4>
+            <p>¡Domina el lenguaje del futuro hoy mismo!</p>
+            <button class="ad-button">Más info</button>
+        </div>
+        <div class="ad-card">
+            <span class="ad-tag">Recomendado</span>
+            <i class="fas fa-microchip"></i>
+            <h4>Hardware 2026</h4>
+            <p>Las mejores GPUs para este año.</p>
+        </div>
+    </aside>
+
+    <aside class="ad-sidebar right">
+        <div class="ad-card">
+            <span class="ad-tag">Servicio</span>
+            <i class="fas fa-tools"></i>
+            <h4>Soporte Técnico</h4>
+            <p>¿Problemas con tu PC? Consultame.</p>
+            <button class="ad-button">Contactar</button>
+        </div>
+        <div class="ad-card">
+            <span class="ad-tag">Novedad</span>
+            <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?w=200&q=80" alt="IA">
+            <h4>Inteligencia Artificial</h4>
+            <p>Cómo usar IA para tu trabajo diario.</p>
+        </div>
+    </aside>
+
+    <header id="home">
+        <div class="container">
+            <h1>{{ profile.name }}</h1>
+            <p class="subtitle">Estudiante de Informática | Entusiasta IT</p>
+            <p class="location"><i class="fas fa-map-marker-alt"></i> {{ profile.location }}</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <section id="about" class="section">
+            <h2>Sobre Mí</h2>
+            <div class="card">
+                <p>Hola, soy <strong>{{ profile.name }}</strong>, tengo {{ profile.age }} años y soy estudiante en el <strong>{{ profile.school }}</strong> en la zona de {{ profile.location }}.</p>
+                <p>{{ profile.about_me }}</p>
+            </div>
+        </section>
+
+        <section id="skills" class="section">
+            <h2>Habilidades Técnicas</h2>
+            <p style="margin-bottom: 20px; color: #666;">Haz clic en cada tarjeta para ver más detalles.</p>
+            <div class="skills-grid">
+                {% for skill in profile.skills %}
+                <div class="skill-card" onclick="toggleSkill(this)">
+                    <h3>{{ skill.name }}</h3>
+                    <p class="level">{{ skill.level }}</p>
+                    <p class="description">{{ skill.description }}</p>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+
+        <script>
+            function toggleSkill(card) {
+                card.classList.toggle('active');
+            }
+        </script>
+
+        <section id="interests" class="section">
+            <h2>Intereses</h2>
+            <div class="interests-grid">
+                {% for interest in profile.interests %}
+                <div class="card interest-card">
+                    <i class="{{ interest.icon }}"></i>
+                    <h3>{{ interest.name }}</h3>
+                    <p>{{ interest.description }}</p>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+
+        <section id="experience" class="section">
+            <h2>Experiencia Laboral</h2>
+            <div class="experience-list">
+                {% for job in profile.experience %}
+                <div class="card experience-item" style="margin-bottom: 20px;">
+                    <h3>{{ job.role }}</h3>
+                    <p class="place"><i class="fas fa-briefcase"></i> {{ job.place }}</p>
+                    <p>{{ job.description }}</p>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+
+        <section id="why-hire" class="section">
+            <h2>¿Por qué contratarme?</h2>
+            <div class="card highlight-card">
+                <div class="highlight-grid">
+                    <div class="highlight-item">
+                        <i class="fas fa-check-circle"></i>
+                        <h4>Responsabilidad</h4>
+                    </div>
+                    <div class="highlight-item">
+                        <i class="fas fa-sync-alt"></i>
+                        <h4>Adaptabilidad</h4>
+                    </div>
+                    <div class="highlight-item">
+                        <i class="fas fa-tools"></i>
+                        <h4>Versatilidad</h4>
+                    </div>
+                </div>
+                <p class="why-text">{{ profile.why_me }}</p>
+            </div>
+        </section>
+
+        <section id="contact" class="section">
+            <h2>Contacto</h2>
+            <div class="contact-grid">
+                <a href="https://instagram.com/{{ profile.contact.instagram }}" target="_blank" class="contact-card">
+                    <i class="fab fa-instagram"></i>
+                    <span>@{{ profile.contact.instagram }}</span>
+                </a>
+                <a href="mailto:{{ profile.contact.gmail }}" class="contact-card">
+                    <i class="far fa-envelope"></i>
+                    <span>{{ profile.contact.gmail }}</span>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 {{ profile.name }} - Desarrollado con Python & Flask</p>
+        </div>
+    </footer>
+</body>
+</html>
